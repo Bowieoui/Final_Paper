@@ -3,32 +3,53 @@
     <title>Snake Game</title>
     <style>
         body {
-            /* Centers content and sets the apple cursor */
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             padding-top: 50px;
-            background-color: #f0f0f0;
+            /* Changing the background to a vibrant apple green */
+            background-color: #8db600; 
             font-family: sans-serif;
-            
-            /* Fallback 'auto' is mandatory for custom cursors to work */
+            /* Browser requires a small image (32x32) and a fallback 'auto' */
             cursor: url('apple.png') 32 32, auto;
         }
 
-        /* Ensures the apple cursor persists over text and images */
         body * {
             cursor: url('apple.png') 32 32, auto;
         }
 
+        .rainbow-title {
+            font-size: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet, red);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: flow 3s linear infinite, breathe 3s ease-in-out infinite;
+        }
+
+        @keyframes flow {
+            to { background-position: 200% center; }
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
         img {
             margin: 20px 0;
-            border: 2px solid #333;
+            border: 5px solid #333;
+            background-color: white; /* Makes the gif stand out against the green */
         }
     </style>
 </head>
 <body>
     <audio id="myAudio" src="stateside.mp3" loop></audio>
+
+    <div class="rainbow-title">Welcome to Snake Game</div>
 
     <br> Hello, world, on this website, we will explore the videogame Snake, and Snake adjacent games. Take for example, Google Snake: </br>
     
@@ -37,12 +58,11 @@
     <br>The goal of the game is simple, eat and grow, but don't crash into yourself.</br>
 
     <script>
-        // Browsers block autoplay until the first user interaction
-        // This script starts the music the moment you click anywhere on the page
+        /* Browsers block audio until the first click */
         document.addEventListener('click', function() {
             var audio = document.getElementById("myAudio");
             audio.play().catch(function(error) {
-                console.log("Audio play failed. Check if stateside.mp3 exists in your folder.");
+                console.log("Audio play failed. Ensure stateside.mp3 is in the same folder.");
             });
         }, { once: true });
     </script>
