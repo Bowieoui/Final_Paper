@@ -3,41 +3,47 @@
     <title>Snake Game</title>
     <style>
         body {
+            /* Centers content and sets the apple cursor */
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-family: 'Courier New', Courier, monospace;
             text-align: center;
-            background-color: #f0f0f0;
             padding-top: 50px;
+            background-color: #f0f0f0;
+            font-family: sans-serif;
+            
+            /* Fallback 'auto' is mandatory for custom cursors to work */
             cursor: url('apple.png') 32 32, auto;
         }
 
-        a, img, button {
-            cursor: url('apple.png') 32 32, pointer;
+        /* Ensures the apple cursor persists over text and images */
+        body * {
+            cursor: url('apple.png') 32 32, auto;
         }
 
         img {
-            border: 5px solid #333;
-            border-radius: 8px;
             margin: 20px 0;
+            border: 2px solid #333;
         }
     </style>
 </head>
 <body>
     <audio id="myAudio" src="stateside.mp3" loop></audio>
 
-    <h1>Snake World</h1>
-    <p>Click anywhere to start the music and use your apple cursor!</p>
-
+    <br> Hello, world, on this website, we will explore the videogame Snake, and Snake adjacent games. Take for example, Google Snake: </br>
+    
     <img src="googlesnake.gif" alt="Google Snake">
-
-    <p>The goal is simple: eat and grow, but don't crash!</p>
+    
+    <br>The goal of the game is simple, eat and grow, but don't crash into yourself.</br>
 
     <script>
-        document.body.addEventListener('click', function() {
+        // Browsers block autoplay until the first user interaction
+        // This script starts the music the moment you click anywhere on the page
+        document.addEventListener('click', function() {
             var audio = document.getElementById("myAudio");
-            audio.play();
+            audio.play().catch(function(error) {
+                console.log("Audio play failed. Check if stateside.mp3 exists in your folder.");
+            });
         }, { once: true });
     </script>
 </body>
